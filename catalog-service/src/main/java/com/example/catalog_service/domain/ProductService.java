@@ -1,4 +1,6 @@
 package com.example.catalog_service.domain;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,5 +37,9 @@ public class ProductService {
             products.hasPrevious()
         );
         return pagedResult;
+    }
+
+    public Optional<Product> getProductByCode(String code) {
+        return productRepository.findByCode(code).map(ProductMapper::toProduct);
     }
 }
